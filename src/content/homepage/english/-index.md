@@ -4,13 +4,13 @@ hero_slider:
   enable: true
   slider_item:
     # slider item
-    - subtitle: "We are here to"
-      title: "Planning Business"
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      bg_image: "/images/slider/banner-1.jpg"
+    - subtitle: "We are the leading company providing"
+      title: "Premier Shipping to Haiti"
+      content: "See for your self how much you can save when you choose us."
+      bg_image: "/images/slider/banner-5.jpg"
       button:
         enable: true
-        label: "more details"
+        label: "Create a Shipping Request"
         link: "/about"
 
     # slider item
@@ -49,22 +49,22 @@ banner_feature:
   # Max use 4 item
   feature_item:
     # banner feature item loop
-    - name: "Business Solution"
+    - name: "Jewelry"
       icon: "FaGem"
       content: "Lorem ipsum dolor sit amet constur adipelit sed."
 
     # banner feature item loop
-    - name: "Market Research"
-      icon: "FaChartBar"
+    - name: "Clothing"
+      icon: "FaShirt"
       content: "Lorem ipsum dolor sit amet constur adipelit sed."
 
     # banner feature item loop
-    - name: "Business Strategy"
+    - name: "Hard Drugs"
       icon: "FaLightbulb"
       content: "Lorem ipsum dolor sit amet constur adipelit sed."
 
     # banner feature item loop
-    - name: "Speed Optimization"
+    - name: "Tools"
       icon: "FaGear"
       content: "Lorem ipsum dolor sit amet constur adipelit sed."
 

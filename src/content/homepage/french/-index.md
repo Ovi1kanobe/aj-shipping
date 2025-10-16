@@ -7,7 +7,7 @@ hero_slider:
     - subtitle: "Nous sommes là pour"
       title: "Planification d'affaires"
       content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      bg_image: "/images/slider/banner-1.jpg"
+      bg_image: "/images/slider/banner-5.jpg"
       button:
         enable: true
         label: "plus de détails"
