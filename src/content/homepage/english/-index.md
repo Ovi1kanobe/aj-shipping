@@ -51,22 +51,22 @@ banner_feature:
     # banner feature item loop
     - name: "Jewelry"
       icon: "FaGem"
-      content: "Lorem ipsum dolor sit amet constur adipelit sed."
+      content: "Send jewelry and precious materials."
 
     # banner feature item loop
     - name: "Clothing"
       icon: "FaShirt"
-      content: "Lorem ipsum dolor sit amet constur adipelit sed."
+      content: "Send suites, ties, shorts, pants, and other fabrics."
 
     # banner feature item loop
-    - name: "Hard Drugs"
+    - name: "Accessories"
       icon: "FaLightbulb"
-      content: "Lorem ipsum dolor sit amet constur adipelit sed."
+      content: "Send Random bits and bobs."
 
     # banner feature item loop
     - name: "Tools"
       icon: "FaGear"
-      content: "Lorem ipsum dolor sit amet constur adipelit sed."
+      content: "Send tools so your loved ones can work."
 
 ######### funfacts ########
 funfacts:
