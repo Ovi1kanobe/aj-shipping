@@ -7,7 +7,7 @@ hero_slider:
     - subtitle: "We are the leading company providing"
       title: "Premier Shipping to Haiti"
       content: "See for your self how much you can save when you choose us."
-      bg_image: "/images/slider/banner-5.jpg"
+      bg_image: "/images/slider/banner-1.webp"
       button:
         enable: true
         label: "Create a Shipping Request"
