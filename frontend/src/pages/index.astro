@@ -13,17 +13,17 @@ import LatestNews from "@/partials/homepage/LatestNews.astro";
 import ServiceSection from "@/partials/homepage/ServiceSection.astro";
 import Team from "@/partials/homepage/Team.astro";
 
-const homepage = await getListPage("homepage", undefined);
+const homepage = await getListPage("homepage");
 const { hero_slider, banner_feature, funfacts, feature, latest_news } =
   homepage[0].data;
 
-const aboutIndex = await getListPage("about", undefined);
-const serviceIndex = await getListPage("services", undefined);
-const services = await getSinglePage("services", undefined);
-const teamIndex = await getListPage("team", undefined);
+const aboutIndex = await getListPage("about");
+const serviceIndex = await getListPage("services");
+const services = await getSinglePage("services");
+const teamIndex = await getListPage("team");
 const team = await getSinglePage("team", undefined);
-const projectIndex = await getListPage("projects", undefined);
-const projects = await getSinglePage("projects", undefined);
+const projectIndex = await getListPage("projects");
+const projects = await getSinglePage("projects");
 
 // Blog collection doesn't exist - pass empty array
 const posts: any[] = [];
