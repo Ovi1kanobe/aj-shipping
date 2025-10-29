@@ -1,0 +1,46 @@
+---
+import { slugify } from "@/lib/utils/textConverter";
+import type { ContentEntryMap } from "astro:content";
+import { getCollection } from "astro:content";
+
+// Simplified taxonomy parser - no multi-language support
+
+// get taxonomy from frontmatter
+export const getTaxonomy = async (collection: string, name: string) => {
+  const singlePages = await getCollection(
+    "blog" as keyof ContentEntryMap,
+    ({ id }: any) => {
+      return !id.endsWith("-index.md");
+    },
+  );
+  const taxonomyPages = singlePages.map((page: any) => page.data[name]);
+  let taxonomies: string[] = [];
+  for (let i = 0; i < taxonomyPages.length; i++) {
+    const categoryArray = taxonomyPages[i];
+    for (let j = 0; j < categoryArray.length; j++) {
+      taxonomies.push(slugify(categoryArray[j]));
+    }
+  }
+  const taxonomy = [...new Set(taxonomies)];
+  return taxonomy;
+};
+
+// get all taxonomies from frontmatter
+export const getAllTaxonomy = async (collection: string, name: string) => {
+  const singlePages = await getCollection(
+    "blog" as keyof ContentEntryMap,
+    ({ id }: any) => {
+      return !id.endsWith("-index.md");
+    },
+  );
+  const taxonomyPages = singlePages.map((page: any) => page.data[name]);
+  let taxonomies: string[] = [];
+  for (let i = 0; i < taxonomyPages.length; i++) {
+    const categoryArray = taxonomyPages[i];
+    for (let j = 0; j < categoryArray.length; j++) {
+      taxonomies.push(slugify(categoryArray[j]));
+    }
+  }
+  return taxonomies;
+};
+---

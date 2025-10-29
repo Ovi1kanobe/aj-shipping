@@ -1,0 +1,24 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+// get all static paths for categories
+// Blog collection doesn't exist - return empty array (no category pages)
+export async function getStaticPaths() {
+  return [];
+}
+
+const { category } = Astro.params;
+---
+
+<Base title={category}>
+  <PageHeader title={category} />
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <p>No blog posts available.</p>
+      </div>
+    </div>
+  </div>
+</Base>

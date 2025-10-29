@@ -1,0 +1,75 @@
+---
+import {
+  getCollection,
+  type CollectionEntry,
+  type CollectionKey,
+} from "astro:content";
+
+// Simplified content parser - no multi-language support
+
+export const getSP = async <C extends CollectionKey>(
+  collectionName: C,
+): Promise<CollectionEntry<C>[]> => {
+  const pages: CollectionEntry<C>[] = (await getCollection(
+    collectionName as any,
+    ({ id }: any) => {
+      return !id.endsWith("-index");
+    },
+  )) as CollectionEntry<C>[];
+
+  // @ts-ignore
+  const removeDrafts = pages.filter((data) => !data.data.draft);
+
+  return removeDrafts;
+};
+
+export const getLP = async <C extends CollectionKey>(
+  collectionName: C,
+): Promise<CollectionEntry<C>[]> => {
+  const pages: CollectionEntry<C>[] = (await getCollection(
+    collectionName as any,
+  )) as CollectionEntry<C>[];
+
+  return pages;
+};
+
+export const getSinglePage = async <C extends CollectionKey>(
+  collectionName: C,
+  subCollectionName?: string,
+): Promise<CollectionEntry<C>[]> => {
+  const pages: CollectionEntry<C>[] = (await getCollection(
+    collectionName as any,
+    ({ id }: any) => {
+      const filter = subCollectionName
+        ? id.startsWith(subCollectionName) && !id.endsWith("-index")
+        : !id.endsWith("-index");
+      return filter;
+    },
+  )) as CollectionEntry<C>[];
+
+  // @ts-ignore
+  const removeDrafts = pages.filter((data) => !data.data.draft);
+
+  return removeDrafts;
+};
+
+export const getListPage = async <C extends CollectionKey>(
+  collectionName: C,
+): Promise<CollectionEntry<C>[]> => {
+  const pages: CollectionEntry<C>[] = (await getCollection(
+    collectionName as any,
+  )) as CollectionEntry<C>[];
+
+  // Sort the pages array
+  return pages.sort((a, b) => {
+    // Put -index at the top
+    if (a.id.endsWith("-index")) return -1;
+    if (b.id.endsWith("-index")) return 1;
+
+    // For other posts, sort by their numeric part
+    const aNum = parseInt(a.id.match(/\d+/)?.[0] || "0");
+    const bNum = parseInt(b.id.match(/\d+/)?.[0] || "0");
+    return aNum - bNum;
+  });
+};
+---
