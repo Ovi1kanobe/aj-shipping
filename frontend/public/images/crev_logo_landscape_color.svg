@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420">
+  <defs>
+    <style>
+      .wordmark { font: 700 150px 'Inter', 'Poppins', 'Segoe UI', Arial, sans-serif; letter-spacing: 2px; }
+      .sub { font: 600 52px 'Inter', 'Poppins', 'Segoe UI', Arial, sans-serif; letter-spacing: 6px; }
+    </style>
+    <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#7CB342"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon block -->
+  <g transform="translate(60,60)">
+    <!-- Swoosh / contrail -->
+    <path d="M 40 280 C 260 250, 300 160, 420 120
+             C 540 80, 640 50, 760 60" fill="none" stroke="url(#planeGrad)" stroke-width="26" stroke-linecap="round"/>
+
+    <!-- Airplane (constructed from simple shapes) -->
+    <g transform="translate(740,40) rotate(18)">
+      <!-- fuselage -->
+      <rect x="0" y="38" rx="10" ry="10" width="200" height="24" fill="url(#planeGrad)"/>
+      <!-- nose -->
+      <polygon points="200,50 230,45 200,35" fill="url(#planeGrad)"/>
+      <!-- main wing -->
+      <polygon points="80,24 130,24 150,0 100,0" fill="url(#planeGrad)"/>
+      <!-- rear wing (tailplane) -->
+      <polygon points="30,76 62,76 50,96 20,96" fill="url(#planeGrad)"/>
+      <!-- vertical stabilizer -->
+      <polygon points="20,38 40,38 48,12 28,12" fill="url(#planeGrad)"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(560,180)">
+    <text x="0" y="0" class="wordmark" fill="#1F2937">CREV</text>
+    <text x="6" y="90" class="sub" fill="#6B7280">SHIPPING</text>
+  </g>
+</svg>

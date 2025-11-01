@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1508" height="400" viewBox="0 0 1508 400">
+  <style>
+    .label { font: 600 28px 'Inter', 'Poppins', 'Segoe UI', Arial, sans-serif; fill: #111827; }
+    .hex { font: 500 24px 'Inter', 'Poppins', 'Segoe UI', Arial, sans-serif; fill: #374151; }
+    .title { font: 700 40px 'Inter', 'Poppins', 'Segoe UI', Arial, sans-serif; fill: #111827; }
+  </style>
+  <text class="title" x="40" y="60">CREV Shipping — Brand Palette</text>
+
+    <g transform="translate(40,100)">
+      <rect x="0" y="0" width="260" height="200" rx="22" ry="22" fill="#2E7D32" stroke="#E5E7EB" stroke-width="2"/>
+      <text class="label" x="22" y="242" fill="#111827">Primary Green</text>
+      <text class="hex" x="22" y="278" fill="#374151">#2E7D32</text>
+    </g>
+    
+    <g transform="translate(332,100)">
+      <rect x="0" y="0" width="260" height="200" rx="22" ry="22" fill="#7CB342" stroke="#E5E7EB" stroke-width="2"/>
+      <text class="label" x="22" y="242" fill="#111827">Accent Green</text>
+      <text class="hex" x="22" y="278" fill="#374151">#7CB342</text>
+    </g>
+    
+    <g transform="translate(624,100)">
+      <rect x="0" y="0" width="260" height="200" rx="22" ry="22" fill="#1F2937" stroke="#E5E7EB" stroke-width="2"/>
+      <text class="label" x="22" y="242" fill="#F9FAFB">Charcoal</text>
+      <text class="hex" x="22" y="278" fill="#E5E7EB">#1F2937</text>
+    </g>
+    
+    <g transform="translate(916,100)">
+      <rect x="0" y="0" width="260" height="200" rx="22" ry="22" fill="#6B7280" stroke="#E5E7EB" stroke-width="2"/>
+      <text class="label" x="22" y="242" fill="#111827">Cool Gray</text>
+      <text class="hex" x="22" y="278" fill="#374151">#6B7280</text>
+    </g>
+    
+    <g transform="translate(1208,100)">
+      <rect x="0" y="0" width="260" height="200" rx="22" ry="22" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="2"/>
+      <text class="label" x="22" y="242" fill="#111827">White</text>
+      <text class="hex" x="22" y="278" fill="#374151">#FFFFFF</text>
+    </g>
+    </svg>
