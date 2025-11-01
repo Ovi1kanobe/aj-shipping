@@ -11,7 +11,6 @@ import FunFacts from "@/partials/homepage/FunFacts.astro";
 import HeroSlider from "@/partials/homepage/HeroSlider.astro";
 import LatestNews from "@/partials/homepage/LatestNews.astro";
 import ServiceSection from "@/partials/homepage/ServiceSection.astro";
-import Team from "@/partials/homepage/Team.astro";
 
 const homepage = await getListPage("homepage");
 const { hero_slider, banner_feature, funfacts, feature, latest_news } =
@@ -20,8 +19,6 @@ const { hero_slider, banner_feature, funfacts, feature, latest_news } =
 const aboutIndex = await getListPage("about");
 const serviceIndex = await getListPage("services");
 const services = await getSinglePage("services");
-const teamIndex = await getListPage("team");
-const team = await getSinglePage("team", undefined);
 const projectIndex = await getListPage("projects");
 const projects = await getSinglePage("projects");
 
@@ -40,11 +37,6 @@ const callToAction = await getSinglePage("callToAction", "call-to-action");
   <FunFacts funfacts={funfacts} />
   <Feature feature={feature} />
   <ServiceSection serviceIndex={serviceIndex[0]} services={services} />
-  <Team
-    teamIndex={teamIndex[0]}
-    team={team.slice(0, 3)}
-    className="pt-0 bg-gray-white"
-  />
   <CaseStudy projectIndex={projectIndex[0]} projects={projects} />
   <Testimonial testimonial={testimonial[0].data} />
   <CallToActionLG callToAction={callToAction[0].data} />

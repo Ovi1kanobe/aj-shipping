@@ -1,11 +1,10 @@
 ---
-import BlogCard from "@/components/BlogCard.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 const { latest_news, posts } = Astro.props;
 ---
 
 {
-  latest_news.enable && (
+  latest_news.enable && posts.length > 0 && (
     <section class="section bg-gray-white relative isolate">
       <div class="container">
         <div class="row">
@@ -18,11 +17,7 @@ const { latest_news, posts } = Astro.props;
           </div>
         </div>
         <div class="row">
-          {posts?.slice(0, 3).map((post: { data: { title: string } }) => (
-            <div class="lg:col-4">
-              <BlogCard data={post} />
-            </div>
-          ))}
+          <p class="text-center">No blog posts available.</p>
         </div>
       </div>
       {/* background shapes */}

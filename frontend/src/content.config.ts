@@ -99,38 +99,6 @@ const pagesCollection = defineCollection({
   }),
 });
 
-const teamCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/team" }),
-  schema: z.object({
-    title: z.string(),
-    meta_title: z.string().optional(),
-    subtitle: z.string().optional(),
-    description: z.string(),
-    bg_image: z.string().optional(),
-    draft: z.boolean().optional(),
-    name: z.string().optional(),
-    image: z.string().optional(),
-    designation: z.string().optional(),
-    social: z
-      .array(
-        z.object({
-          name: z.string(),
-          icon: z.string(),
-          link: z.string(),
-        }),
-      )
-      .optional(),
-    skill_title: z.string().optional(),
-    skills: z
-      .array(
-        z.object({
-          label: z.string(),
-          percentage: z.string(),
-        }),
-      )
-      .optional(),
-  }),
-});
 
 // Contact collection schema
 const contactCollection = defineCollection({
@@ -281,7 +249,6 @@ export const collections = {
   homepage: homepageCollection,
   projects: projectsCollection,
   pages: pagesCollection,
-  team: teamCollection,
   contact: contactCollection,
   about: aboutCollection,
   services: serviceCollection,

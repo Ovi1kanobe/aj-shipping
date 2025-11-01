@@ -8,6 +8,7 @@ export const slugify = (content: string) => {
 
 // markdownify
 export const markdownify = (content: string, div?: boolean) => {
+  if (!content) return "";
   return div ? marked.parse(content) : marked.parseInline(content);
 };
 
@@ -33,6 +34,7 @@ export const titleify = (content: string) => {
 
 // plainify
 export const plainify = (content: string) => {
+  if (!content) return "";
   const parseMarkdown: any = marked.parse(content);
   const filterBrackets = parseMarkdown.replace(/<\/?[^>]+(>|$)/gm, "");
   const filterSpaces = filterBrackets.replace(/[\r\n]\s*[\r\n]/gm, "");

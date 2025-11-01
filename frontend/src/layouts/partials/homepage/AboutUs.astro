@@ -31,13 +31,13 @@ const lang = getLangFromUrl(Astro.url);
             </div>
             <div class="md:col-6">
               <span class="section-title-border" />
-              <p class="text-h5" set:html={markdownify(about.subtitle)} />
-              <h2
+              {about.subtitle && <p class="text-h5" set:html={markdownify(about.subtitle)} />}
+              {about.title && <h2
                 class="h1 mb-10 mt-4 text-balance"
                 set:html={markdownify(about.title)}
-              />
-              <p class="mb-5" set:html={markdownify(about.content)} />
-              {about.button.enable && (
+              />}
+              {about.content && <p class="mb-5" set:html={markdownify(about.content)} />}
+              {about.button && about.button.enable && (
                 <a
                   class="btn btn-primary"
                   href={slugSelector(about.button.link, lang)}
