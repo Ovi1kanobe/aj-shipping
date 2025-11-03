@@ -1,0 +1,298 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+const title = "Get a Shipping Quote";
+const description = "Get instant shipping quotes for your cargo";
+const meta_title = "Shipping Quote - AJ Shipping";
+---
+
+<Base title={title} meta_title={meta_title} description={description}>
+  <PageHeader title={title} />
+
+  <!-- Quote Form Section -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-10 md:col-8 lg:col-6">
+          <div class="bg-white box-shadow p-8 rounded">
+            <h2 class="text-h4 mb-6">Calculate Shipping Cost</h2>
+
+            <form id="quote-form" class="space-y-5">
+              <!-- Origin (Fixed) -->
+              <div>
+                <label for="origin" class="block mb-2 font-medium"
+                  >Origin</label
+                >
+                <input
+                  type="text"
+                  id="origin"
+                  value="United States"
+                  class="form-control border rounded w-full px-4 py-2 bg-gray-100"
+                  disabled
+                />
+              </div>
+
+              <!-- Destination -->
+              <div>
+                <label for="destination" class="block mb-2 font-medium"
+                  >Destination <span class="text-red-500">*</span></label
+                >
+                <select
+                  id="destination"
+                  name="destination"
+                  class="form-control border rounded w-full px-4 py-2"
+                  required
+                >
+                  <option value="">Select destination...</option>
+                  <option value="Haiti">Haiti</option>
+                  <option value="Dominican Republic">Dominican Republic</option>
+                  <option value="Jamaica">Jamaica</option>
+                  <option value="Cuba">Cuba</option>
+                  <option value="Puerto Rico">Puerto Rico</option>
+                  <option value="Bahamas">Bahamas</option>
+                  <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                  <option value="Barbados">Barbados</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Canada">Canada</option>
+                </select>
+              </div>
+
+              <!-- Weight -->
+              <div>
+                <label for="weight" class="block mb-2 font-medium"
+                  >Weight (lbs) <span class="text-red-500">*</span></label
+                >
+                <input
+                  type="number"
+                  id="weight"
+                  name="weight"
+                  min="1"
+                  step="0.1"
+                  class="form-control border rounded w-full px-4 py-2"
+                  placeholder="Enter weight in pounds"
+                  required
+                />
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary w-full">
+                Get Quote
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div
+        id="loading"
+        class="row justify-center mt-8 hidden"
+        style="display: none;"
+      >
+        <div class="col-10 md:col-8">
+          <div class="text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p class="mt-4 text-lg">Getting shipping quotes...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div
+        id="results"
+        class="row justify-center mt-8 hidden"
+        style="display: none;"
+      >
+        <div class="col-10 md:col-10 lg:col-8">
+          <div class="bg-white box-shadow p-6 md:p-8 rounded">
+            <h3 class="text-h4 mb-6">Available Shipping Options</h3>
+
+            <!-- Results Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full" id="results-table">
+                <thead>
+                  <tr class="border-b-2 border-gray-300">
+                    <th class="text-left py-3 px-4 font-semibold">
+                      Delivery Method
+                    </th>
+                    <th class="text-left py-3 px-4 font-semibold">
+                      Estimated Arrival
+                    </th>
+                    <th class="text-right py-3 px-4 font-semibold">Price</th>
+                  </tr>
+                </thead>
+                <tbody id="results-body">
+                  <!-- Results will be inserted here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById("quote-form") as HTMLFormElement;
+    const loadingEl = document.getElementById("loading") as HTMLElement;
+    const resultsEl = document.getElementById("results") as HTMLElement;
+    const resultsBody = document.getElementById("results-body") as HTMLElement;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const destination = (
+        document.getElementById("destination") as HTMLSelectElement
+      ).value;
+      const weight = (document.getElementById("weight") as HTMLInputElement)
+        .value;
+
+      // Show loading, hide results
+      loadingEl.style.display = "block";
+      loadingEl.classList.remove("hidden");
+      resultsEl.style.display = "none";
+      resultsEl.classList.add("hidden");
+
+      try {
+        // Make API call to dummy URL
+        const response = await fetch("https://api.example.com/quote", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            origin: "United States",
+            destination,
+            weight: parseFloat(weight),
+          }),
+        });
+
+        // Simulate API delay and generate mock data since the URL is dummy
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        // Generate mock shipping options
+        const shippingOptions = generateMockOptions(destination, weight);
+
+        // Display results
+        displayResults(shippingOptions);
+      } catch (error) {
+        console.error("Error fetching quote:", error);
+        // Still show mock data even if fetch fails (since it's a dummy URL)
+        const shippingOptions = generateMockOptions(destination, weight);
+        displayResults(shippingOptions);
+      }
+    });
+
+    function generateMockOptions(destination: string, weight: string) {
+      const basePrice = parseFloat(weight) * 2.5;
+      const today = new Date();
+
+      return [
+        {
+          method: "Air Freight - Express",
+          type: "Plane",
+          arrivalDate: new Date(
+            today.getTime() + 3 * 24 * 60 * 60 * 1000,
+          ).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          price: (basePrice * 3.5).toFixed(2),
+        },
+        {
+          method: "Air Freight - Standard",
+          type: "Plane",
+          arrivalDate: new Date(
+            today.getTime() + 7 * 24 * 60 * 60 * 1000,
+          ).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          price: (basePrice * 2.2).toFixed(2),
+        },
+        {
+          method: "Ocean Freight - Express",
+          type: "Boat",
+          arrivalDate: new Date(
+            today.getTime() + 14 * 24 * 60 * 60 * 1000,
+          ).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          price: (basePrice * 1.5).toFixed(2),
+        },
+        {
+          method: "Ocean Freight - Economy",
+          type: "Boat",
+          arrivalDate: new Date(
+            today.getTime() + 21 * 24 * 60 * 60 * 1000,
+          ).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          price: basePrice.toFixed(2),
+        },
+      ];
+    }
+
+    function displayResults(options: any[]) {
+      // Clear previous results
+      resultsBody.innerHTML = "";
+
+      // Add each option as a table row
+      options.forEach((option) => {
+        const row = document.createElement("tr");
+        row.className = "border-b border-gray-200 hover:bg-gray-50";
+        row.innerHTML = `
+          <td class="py-4 px-4">
+            <div class="font-medium">${option.method}</div>
+            <div class="text-sm text-gray-600 mt-1">
+              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                option.type === "Plane"
+                  ? "bg-blue-100 text-blue-800"
+                  : "bg-green-100 text-green-800"
+              }">
+                ${option.type}
+              </span>
+            </div>
+          </td>
+          <td class="py-4 px-4">
+            <div class="text-gray-700">${option.arrivalDate}</div>
+          </td>
+          <td class="py-4 px-4 text-right">
+            <button class="btn btn-primary text-sm px-4 py-2">
+              $${option.price}
+            </button>
+          </td>
+        `;
+        resultsBody.appendChild(row);
+      });
+
+      // Hide loading, show results
+      loadingEl.style.display = "none";
+      loadingEl.classList.add("hidden");
+      resultsEl.style.display = "block";
+      resultsEl.classList.remove("hidden");
+    }
+  </script>
+
+  <style>
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</Base>

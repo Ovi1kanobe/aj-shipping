@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	// _ "github.com/FiretailHosting/CrevShipping/migrations"
+	_ "github.com/FiretailHosting/CrevShipping/migrations"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"

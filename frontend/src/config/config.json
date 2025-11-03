@@ -43,7 +43,7 @@
   "navigation_button": {
     "enable": true,
     "label": "Get A Quote",
-    "link": "/contact"
+    "link": "/quote"
   },
 
   "metadata": {
