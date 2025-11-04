@@ -1,3 +1,6 @@
 pb_data/
 build/
-.tar.gz
+*.tar.gz
+.env
+frontend/src/lib/pburl.ts
+frontend/src/lib/version.ts

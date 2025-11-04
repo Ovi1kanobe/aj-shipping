@@ -21,7 +21,7 @@ export function isAuthenticated(): boolean {
  * Helper: Get current user
  */
 export function getCurrentUser() {
-  return pb.authStore.model;
+  return pb.authStore.record;
 }
 
 /**
