@@ -36,7 +36,7 @@ const meta_title = "Shipping Quote - AJ Shipping";
               <!-- Destination -->
               <div>
                 <label for="destination" class="block mb-2 font-medium"
-                  >Destination <span class="text-red-500">*</span></label
+                  >Destination Country <span class="text-red-500">*</span></label
                 >
                 <select
                   id="destination"
@@ -58,6 +58,263 @@ const meta_title = "Shipping Quote - AJ Shipping";
                 </select>
               </div>
 
+              <!-- Sender Information -->
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h3 class="text-lg font-semibold mb-4">Sender Information (Your Details)</h3>
+                
+                <!-- Sender Name -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="sender-first-name" class="block mb-2 font-medium"
+                      >Your First Name <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="sender-first-name"
+                      name="sender-first-name"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Your first name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="sender-last-name" class="block mb-2 font-medium"
+                      >Your Last Name <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="sender-last-name"
+                      name="sender-last-name"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Your last name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Sender Contact Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="sender-email" class="block mb-2 font-medium"
+                      >Email Address <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="email"
+                      id="sender-email"
+                      name="sender-email"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="sender-phone" class="block mb-2 font-medium"
+                      >Phone Number <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="tel"
+                      id="sender-phone"
+                      name="sender-phone"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Your phone number"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Sender Address -->
+                <div class="mb-4">
+                  <label for="sender-address" class="block mb-2 font-medium"
+                    >Your Address <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="sender-address"
+                    name="sender-address"
+                    class="form-control border rounded w-full px-4 py-2"
+                    placeholder="Your complete address"
+                    required
+                  />
+                </div>
+
+                <!-- Sender City, State, ZIP -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label for="sender-city" class="block mb-2 font-medium"
+                      >City <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="sender-city"
+                      name="sender-city"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Your city"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="sender-state" class="block mb-2 font-medium"
+                      >State <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="sender-state"
+                      name="sender-state"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="State"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="sender-zip" class="block mb-2 font-medium"
+                      >ZIP Code <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="sender-zip"
+                      name="sender-zip"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="ZIP Code"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recipient Information -->
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="text-lg font-semibold mb-4">Recipient Information</h3>
+                
+                <!-- Recipient Name -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="recipient-first-name" class="block mb-2 font-medium"
+                      >First Name <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="recipient-first-name"
+                      name="recipient-first-name"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Recipient's first name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="recipient-last-name" class="block mb-2 font-medium"
+                      >Last Name <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="recipient-last-name"
+                      name="recipient-last-name"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Recipient's last name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-4">
+                  <label for="recipient-phone" class="block mb-2 font-medium"
+                    >Phone Number <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="tel"
+                    id="recipient-phone"
+                    name="recipient-phone"
+                    class="form-control border rounded w-full px-4 py-2"
+                    placeholder="Recipient's phone number with country code"
+                    required
+                  />
+                </div>
+
+                <!-- Address Line 1 -->
+                <div class="mb-4">
+                  <label for="address-line1" class="block mb-2 font-medium"
+                    >Address Line 1 <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="address-line1"
+                    name="address-line1"
+                    class="form-control border rounded w-full px-4 py-2"
+                    placeholder="Street address, building number"
+                    required
+                  />
+                </div>
+
+                <!-- Address Line 2 -->
+                <div class="mb-4">
+                  <label for="address-line2" class="block mb-2 font-medium"
+                    >Address Line 2</label
+                  >
+                  <input
+                    type="text"
+                    id="address-line2"
+                    name="address-line2"
+                    class="form-control border rounded w-full px-4 py-2"
+                    placeholder="Apartment, suite, unit, etc. (optional)"
+                  />
+                </div>
+
+                <!-- City, State/Province, Postal Code -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div>
+                    <label for="city" class="block mb-2 font-medium"
+                      >City <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="City"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="state-province" class="block mb-2 font-medium"
+                      >State/Province</label
+                    >
+                    <input
+                      type="text"
+                      id="state-province"
+                      name="state-province"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="State or Province"
+                    />
+                  </div>
+                  <div>
+                    <label for="postal-code" class="block mb-2 font-medium"
+                      >Postal/ZIP Code</label
+                    >
+                    <input
+                      type="text"
+                      id="postal-code"
+                      name="postal-code"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Postal or ZIP code"
+                    />
+                  </div>
+                </div>
+
+                <!-- Special Instructions -->
+                <div>
+                  <label for="delivery-instructions" class="block mb-2 font-medium"
+                    >Delivery Instructions</label
+                  >
+                  <textarea
+                    id="delivery-instructions"
+                    name="delivery-instructions"
+                    rows="3"
+                    class="form-control border rounded w-full px-4 py-2"
+                    placeholder="Any special delivery instructions, landmarks, or notes for the delivery driver"
+                  ></textarea>
+                </div>
+              </div>
+
               <!-- Weight -->
               <div>
                 <label for="weight" class="block mb-2 font-medium"
@@ -73,6 +330,89 @@ const meta_title = "Shipping Quote - AJ Shipping";
                   placeholder="Enter weight in pounds"
                   required
                 />
+              </div>
+
+              <!-- Value -->
+              <div>
+                <label for="value" class="block mb-2 font-medium"
+                  >Declared Value (USD) <span class="text-red-500">*</span></label
+                >
+                <input
+                  type="number"
+                  id="value"
+                  name="value"
+                  min="0"
+                  step="0.01"
+                  class="form-control border rounded w-full px-4 py-2"
+                  placeholder="Enter item value in USD"
+                  required
+                />
+              </div>
+
+              <!-- Dimensions -->
+              <div>
+                <label class="block mb-2 font-medium"
+                  >Dimensions (inches) <span class="text-red-500">*</span></label
+                >
+                <div class="grid grid-cols-3 gap-3">
+                  <div>
+                    <input
+                      type="number"
+                      id="length"
+                      name="length"
+                      min="1"
+                      step="0.1"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Length"
+                      required
+                    />
+                    <label for="length" class="text-sm text-gray-600 mt-1">Length</label>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      id="width"
+                      name="width"
+                      min="1"
+                      step="0.1"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Width"
+                      required
+                    />
+                    <label for="width" class="text-sm text-gray-600 mt-1">Width</label>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      id="height"
+                      name="height"
+                      min="1"
+                      step="0.1"
+                      class="form-control border rounded w-full px-4 py-2"
+                      placeholder="Height"
+                      required
+                    />
+                    <label for="height" class="text-sm text-gray-600 mt-1">Height</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item/Box Image -->
+              <div>
+                <label for="item-image" class="block mb-2 font-medium"
+                  >Item/Box Image <span class="text-red-500">*</span></label
+                >
+                <input
+                  type="file"
+                  id="item-image"
+                  name="item-image"
+                  accept="image/*"
+                  class="form-control border rounded w-full px-4 py-2"
+                  required
+                />
+                <p class="text-sm text-gray-600 mt-1">
+                  Upload a clear photo of the item or box to be shipped
+                </p>
               </div>
 
               <!-- Submit Button -->
@@ -134,59 +474,227 @@ const meta_title = "Shipping Quote - AJ Shipping";
   </section>
 
   <script>
+    import pb from "@/lib/utils/pocketbase";
+
     const form = document.getElementById("quote-form") as HTMLFormElement;
     const loadingEl = document.getElementById("loading") as HTMLElement;
     const resultsEl = document.getElementById("results") as HTMLElement;
     const resultsBody = document.getElementById("results-body") as HTMLElement;
 
+    document.addEventListener("DOMContentLoaded", async () => {
+      const destinationSelect = document.getElementById("destination") as HTMLSelectElement;
+      
+      try {
+        const supportedCountries = await pb.collection("supported_countries").getFullList({
+          sort: "name", // Sort alphabetically by country name
+        });
+        
+        // Clear existing options (except the first placeholder)
+        destinationSelect.innerHTML = '<option value="">Select destination...</option>';
+        
+        // Add countries from database
+        supportedCountries.forEach((country: any) => {
+          const option = document.createElement("option");
+          option.value = country.id; // Use the country ID as the value
+          option.textContent = country.name || country.country_name;
+          destinationSelect.appendChild(option);
+        });
+        
+        console.log(`Loaded ${supportedCountries.length} supported countries`);
+      } catch (error) {
+        console.error("Failed to load supported countries:", error);
+        // Fallback to hardcoded options if API fails
+        console.log("Using fallback country list");
+      }
+    });
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const destination = (
-        document.getElementById("destination") as HTMLSelectElement
-      ).value;
-      const weight = (document.getElementById("weight") as HTMLInputElement)
-        .value;
+      // Check for referrer query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const referrer = urlParams.get('referrer');
+      
+      // Get form values
+      const destination = (document.getElementById("destination") as HTMLSelectElement).value;
+      const weight = (document.getElementById("weight") as HTMLInputElement).value;
+      const value = (document.getElementById("value") as HTMLInputElement).value;
+      const length = (document.getElementById("length") as HTMLInputElement).value;
+      const width = (document.getElementById("width") as HTMLInputElement).value;
+      const height = (document.getElementById("height") as HTMLInputElement).value;
+      const imageFile = (document.getElementById("item-image") as HTMLInputElement).files?.[0];
+      
+      // Get sender information
+      const senderFirstName = (document.getElementById("sender-first-name") as HTMLInputElement).value;
+      const senderLastName = (document.getElementById("sender-last-name") as HTMLInputElement).value;
+      const senderEmail = (document.getElementById("sender-email") as HTMLInputElement).value;
+      const senderPhone = (document.getElementById("sender-phone") as HTMLInputElement).value;
+      const senderAddress = (document.getElementById("sender-address") as HTMLInputElement).value;
+      const senderCity = (document.getElementById("sender-city") as HTMLInputElement).value;
+      const senderState = (document.getElementById("sender-state") as HTMLInputElement).value;
+      const senderZip = (document.getElementById("sender-zip") as HTMLInputElement).value;
+      
+      // Get recipient information
+      const recipientFirstName = (document.getElementById("recipient-first-name") as HTMLInputElement).value;
+      const recipientLastName = (document.getElementById("recipient-last-name") as HTMLInputElement).value;
+      const recipientPhone = (document.getElementById("recipient-phone") as HTMLInputElement).value;
+      const addressLine1 = (document.getElementById("address-line1") as HTMLInputElement).value;
+      const addressLine2 = (document.getElementById("address-line2") as HTMLInputElement).value;
+      const city = (document.getElementById("city") as HTMLInputElement).value;
+      const stateProvince = (document.getElementById("state-province") as HTMLInputElement).value;
+      const postalCode = (document.getElementById("postal-code") as HTMLInputElement).value;
+      const deliveryInstructions = (document.getElementById("delivery-instructions") as HTMLTextAreaElement).value;
 
-      // Show loading, hide results
+      // Show loading state
       loadingEl.style.display = "block";
       loadingEl.classList.remove("hidden");
       resultsEl.style.display = "none";
       resultsEl.classList.add("hidden");
 
       try {
-        // Make API call to dummy URL
-        const response = await fetch("https://api.example.com/quote", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            origin: "United States",
-            destination,
-            weight: parseFloat(weight),
-          }),
-        });
+        // Create quote request in PocketBase
+        const quoteData: any = {
+          // Shipment details
+          destination_country: destination,
+          weight_lbs: weight,
+          declared_value_usd: parseFloat(value),
+          length_inches: parseFloat(length),
+          width_inches: parseFloat(width),
+          height_inches: parseFloat(height),
+          
+          // Sender information
+          sender_first_name: senderFirstName,
+          sender_last_name: senderLastName,
+          sender_email: senderEmail,
+          sender_phone: senderPhone,
+          sender_address: senderAddress,
+          sender_city: senderCity,
+          sender_state: senderState,
+          sender_zip_code: senderZip,
+          
+          // Recipient information
+          recipient_first_name: recipientFirstName,
+          recipient_last_name: recipientLastName,
+          recipient_phone: recipientPhone,
+          recipient_address_1: addressLine1 + (addressLine2 ? `, ${addressLine2}` : ''),
+          recipient_city: city,
+          recipient_state: stateProvince,
+          recipient_postal_code: postalCode,
+          delivery_instructions: deliveryInstructions,
+          
+          // Set initial status
+          completed: false,
+        };
 
-        // Simulate API delay and generate mock data since the URL is dummy
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        // Add referrer if present
+        if (referrer) {
+          quoteData.referrer = referrer;
+        }
 
-        // Generate mock shipping options
-        const shippingOptions = generateMockOptions(destination, weight);
+        // If there's an image, include it
+        if (imageFile) {
+          quoteData.item_image = imageFile;
+        }
 
-        // Display results
-        displayResults(shippingOptions);
+        const record = await pb.collection("quote_requests").create(quoteData);
+        
+        // Show success message
+        showSuccessMessage(senderEmail);
+        
       } catch (error) {
-        console.error("Error fetching quote:", error);
-        // Still show mock data even if fetch fails (since it's a dummy URL)
-        const shippingOptions = generateMockOptions(destination, weight);
-        displayResults(shippingOptions);
+        console.error("Error creating quote request:", error);
+        showErrorMessage();
       }
     });
 
-    function generateMockOptions(destination: string, weight: string) {
+    function showSuccessMessage(email: string) {
+      // Hide loading
+      loadingEl.style.display = "none";
+      loadingEl.classList.add("hidden");
+      
+      // Show success message in results section
+      resultsEl.style.display = "block";
+      resultsEl.classList.remove("hidden");
+      
+      const resultsContainer = resultsEl.querySelector('.bg-white.box-shadow');
+      if (resultsContainer) {
+        resultsContainer.innerHTML = `
+          <div class="text-center py-8">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+              <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Quote Request Submitted!</h3>
+            <p class="text-gray-600 mb-4">
+              Thank you for your quote request. We have received all your shipping details and will prepare a custom quote for you.
+            </p>
+            <p class="text-sm text-gray-500 mb-6">
+              We will send your detailed shipping quote to <strong>${email}</strong> within 24 hours.
+            </p>
+            <button 
+              onclick="window.location.reload()" 
+              class="btn btn-primary px-6 py-2"
+            >
+              Submit Another Quote
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function showErrorMessage() {
+      // Hide loading
+      loadingEl.style.display = "none";
+      loadingEl.classList.add("hidden");
+      
+      // Show error message in results section
+      resultsEl.style.display = "block";
+      resultsEl.classList.remove("hidden");
+      
+      const resultsContainer = resultsEl.querySelector('.bg-white.box-shadow');
+      if (resultsContainer) {
+        resultsContainer.innerHTML = `
+          <div class="text-center py-8">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+              <svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Submission Failed</h3>
+            <p class="text-gray-600 mb-4">
+              We're sorry, but there was an error submitting your quote request. Please try again.
+            </p>
+            <p class="text-sm text-gray-500 mb-6">
+              If the problem persists, please contact us directly at <a href="mailto:quotes@ajshipping.com" class="text-primary underline">quotes@ajshipping.com</a>
+            </p>
+            <button 
+              onclick="window.location.reload()" 
+              class="btn btn-primary px-6 py-2"
+            >
+              Try Again
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function generateMockOptions(destination: string, weight: string, value?: string, length?: string, width?: string, height?: string) {
       const basePrice = parseFloat(weight) * 2.5;
+      const itemValue = parseFloat(value || "100");
       const today = new Date();
+      
+      // Calculate dimensional weight (L × W × H ÷ 166 for air freight)
+      const dimensionalWeight = length && width && height 
+        ? (parseFloat(length) * parseFloat(width) * parseFloat(height)) / 166 
+        : 0;
+      
+      // Use higher of actual weight or dimensional weight for pricing
+      const billingWeight = Math.max(parseFloat(weight), dimensionalWeight);
+      const adjustedBasePrice = billingWeight * 2.5;
+      
+      // Add insurance cost based on declared value (0.5% of value)
+      const insuranceCost = itemValue * 0.005;
 
       return [
         {
@@ -199,7 +707,7 @@ const meta_title = "Shipping Quote - AJ Shipping";
             day: "numeric",
             year: "numeric",
           }),
-          price: (basePrice * 3.5).toFixed(2),
+          price: (adjustedBasePrice * 3.5 + insuranceCost).toFixed(2),
         },
         {
           method: "Air Freight - Standard",
@@ -211,7 +719,7 @@ const meta_title = "Shipping Quote - AJ Shipping";
             day: "numeric",
             year: "numeric",
           }),
-          price: (basePrice * 2.2).toFixed(2),
+          price: (adjustedBasePrice * 2.2 + insuranceCost).toFixed(2),
         },
         {
           method: "Ocean Freight - Express",
@@ -223,7 +731,7 @@ const meta_title = "Shipping Quote - AJ Shipping";
             day: "numeric",
             year: "numeric",
           }),
-          price: (basePrice * 1.5).toFixed(2),
+          price: (adjustedBasePrice * 1.5 + insuranceCost).toFixed(2),
         },
         {
           method: "Ocean Freight - Economy",
@@ -235,7 +743,7 @@ const meta_title = "Shipping Quote - AJ Shipping";
             day: "numeric",
             year: "numeric",
           }),
-          price: basePrice.toFixed(2),
+          price: (adjustedBasePrice + insuranceCost).toFixed(2),
         },
       ];
     }

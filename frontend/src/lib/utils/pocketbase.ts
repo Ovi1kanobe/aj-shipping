@@ -1,5 +1,6 @@
 import PocketBase from "pocketbase";
 import { POCKETBASE_URL } from "./pburl";
+import { type TypedPocketBase } from "../pocketbase-types";
 
 // PocketBase instance - singleton pattern
 // Replace with your actual PocketBase URL
@@ -8,7 +9,7 @@ import { POCKETBASE_URL } from "./pburl";
  * Create a new PocketBase instance
  * This is the main instance you'll use throughout your app
  */
-export const pb = new PocketBase(POCKETBASE_URL);
+export const pb = new PocketBase(POCKETBASE_URL) as TypedPocketBase;
 
 /**
  * Helper: Check if user is authenticated

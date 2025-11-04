@@ -11,6 +11,11 @@ export enum Collections {
 	Mfas = "_mfas",
 	Otps = "_otps",
 	Superusers = "_superusers",
+	Carriers = "carriers",
+	Partners = "partners",
+	QuoteRequests = "quote_requests",
+	ShippingMethods = "shipping_methods",
+	SupportedCountries = "supported_countries",
 	Users = "users",
 }
 
@@ -92,6 +97,66 @@ export type SuperusersRecord = {
 	verified?: boolean
 }
 
+export type CarriersRecord = {
+	created: IsoAutoDateString
+	id: string
+	name?: string
+	updated: IsoAutoDateString
+}
+
+export type PartnersRecord = {
+	created: IsoAutoDateString
+	id: string
+	name?: string
+	updated: IsoAutoDateString
+}
+
+export type QuoteRequestsRecord = {
+	completed?: boolean
+	created: IsoAutoDateString
+	declared_value_usd?: number
+	delivery_instructions?: string
+	destination_country?: RecordIdString
+	height_inches?: number
+	id: string
+	item_image?: FileNameString
+	length_inches?: number
+	quote_price?: number
+	recipient_address_1?: string
+	recipient_city?: string
+	recipient_first_name?: string
+	recipient_last_name?: string
+	recipient_phone?: string
+	recipient_postal_code?: string
+	recipient_state?: string
+	referrer?: RecordIdString
+	sender_address?: string
+	sender_city?: string
+	sender_email?: string
+	sender_first_name?: string
+	sender_last_name?: string
+	sender_phone?: string
+	sender_state?: string
+	sender_zip_code?: string
+	updated: IsoAutoDateString
+	weight_lbs?: string
+	width_inches?: number
+}
+
+export type ShippingMethodsRecord = {
+	created: IsoAutoDateString
+	id: string
+	name?: string
+	updated: IsoAutoDateString
+}
+
+export type SupportedCountriesRecord = {
+	created: IsoAutoDateString
+	id: string
+	name?: string
+	updated: IsoAutoDateString
+}
+
 export type UsersRecord = {
 	avatar?: FileNameString
 	created: IsoAutoDateString
@@ -111,6 +176,11 @@ export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRec
 export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemFields<Texpand>
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
+export type CarriersResponse<Texpand = unknown> = Required<CarriersRecord> & BaseSystemFields<Texpand>
+export type PartnersResponse<Texpand = unknown> = Required<PartnersRecord> & BaseSystemFields<Texpand>
+export type QuoteRequestsResponse<Texpand = unknown> = Required<QuoteRequestsRecord> & BaseSystemFields<Texpand>
+export type ShippingMethodsResponse<Texpand = unknown> = Required<ShippingMethodsRecord> & BaseSystemFields<Texpand>
+export type SupportedCountriesResponse<Texpand = unknown> = Required<SupportedCountriesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -121,6 +191,11 @@ export type CollectionRecords = {
 	_mfas: MfasRecord
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
+	carriers: CarriersRecord
+	partners: PartnersRecord
+	quote_requests: QuoteRequestsRecord
+	shipping_methods: ShippingMethodsRecord
+	supported_countries: SupportedCountriesRecord
 	users: UsersRecord
 }
 
@@ -130,6 +205,11 @@ export type CollectionResponses = {
 	_mfas: MfasResponse
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
+	carriers: CarriersResponse
+	partners: PartnersResponse
+	quote_requests: QuoteRequestsResponse
+	shipping_methods: ShippingMethodsResponse
+	supported_countries: SupportedCountriesResponse
 	users: UsersResponse
 }
 
