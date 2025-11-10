@@ -73,9 +73,9 @@ funfacts:
   enable: true
   funfacts_item:
     # fanfacts item loop
-    - name: "project done"
-      count: "50"
-      icon: "FaBullseye"
+    - name: "Packages Delivered"
+      count: "10000"
+      icon: "FaBoxes"
 
     # fanfacts item loop
     - name: "Years Experience"
@@ -83,37 +83,37 @@ funfacts:
       icon: "FaCalendarDays"
 
     # fanfacts item loop
-    - name: "Awards Win"
-      count: "250"
-      icon: "FaAward"
+    - name: "Routes to Haiti"
+      count: "15"
+      icon: "FaRoute"
 
     # fanfacts item loop
-    - name: "Happy Coustomers"
-      count: "500"
+    - name: "Happy Customers"
+      count: "2500"
       icon: "FaRegFaceSmile"
 
 ########## feature ##########
 feature:
   enable: true
   subtitle: "Why Choose Us"
-  title: "Why They Choose Bexar"
+  title: "Why They Choose Crev Shipping"
   image: "/images/feature/feature.png"
-  content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incididunt ut labore."
+  content: "We provide reliable, fast, and secure shipping services to Haiti with unmatched customer service and competitive rates."
   feature_item:
     # feature item loop
-    - name: "Creative Design"
-      icon: FaSnowflake
-      content: "Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia."
+    - name: "Fast Delivery"
+      icon: FaTruck
+      content: "Quick and reliable delivery to Haiti with real-time tracking for peace of mind."
 
     # feature item loop
-    - name: "Pixel Perfect Coding"
-      icon: FaCode
-      content: "Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia."
+    - name: "Secure Packaging"
+      icon: FaShield
+      content: "Professional packaging and handling to ensure your items arrive safely and intact."
 
 ######## blog #######
 latest_news:
   enable: true
   show_item: 3
-  title: "Learn From Bexar"
-  sub_title: "Latest News"
+  title: "Stay Updated with Crev Shipping"
+  sub_title: "Latest News & Updates"
 ---

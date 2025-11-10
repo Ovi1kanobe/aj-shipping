@@ -598,12 +598,12 @@ const meta_title = "Shipping Quote - AJ Shipping";
 
         const record = await pb.collection("quote_requests").create(quoteData);
         
-        // Show success message
+        // Show success message and hide form
         showSuccessMessage(senderEmail);
         
       } catch (error) {
         console.error("Error creating quote request:", error);
-        showErrorMessage();
+        showErrorToast();
       }
     });
 
@@ -612,29 +612,41 @@ const meta_title = "Shipping Quote - AJ Shipping";
       loadingEl.style.display = "none";
       loadingEl.classList.add("hidden");
       
+      // Hide the form
+      const formContainer = document.querySelector('.col-10.md\\:col-8.lg\\:col-6') as HTMLElement;
+      if (formContainer) {
+        formContainer.style.display = "none";
+      }
+      
       // Show success message in results section
       resultsEl.style.display = "block";
       resultsEl.classList.remove("hidden");
       
+      // Center the results section
+      const resultsRow = resultsEl.parentElement as HTMLElement;
+      if (resultsRow) {
+        resultsRow.className = "row justify-center mt-8";
+      }
+      
       const resultsContainer = resultsEl.querySelector('.bg-white.box-shadow');
       if (resultsContainer) {
         resultsContainer.innerHTML = `
-          <div class="text-center py-8">
-            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
-              <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="text-center py-12">
+            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
+              <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Quote Request Submitted!</h3>
-            <p class="text-gray-600 mb-4">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Quote Request Submitted!</h3>
+            <p class="text-gray-600 mb-4 text-lg">
               Thank you for your quote request. We have received all your shipping details and will prepare a custom quote for you.
             </p>
-            <p class="text-sm text-gray-500 mb-6">
+            <p class="text-gray-500 mb-8">
               We will send your detailed shipping quote to <strong>${email}</strong> within 24 hours.
             </p>
             <button 
               onclick="window.location.reload()" 
-              class="btn btn-primary px-6 py-2"
+              class="btn btn-primary px-8 py-3"
             >
               Submit Another Quote
             </button>
@@ -643,40 +655,43 @@ const meta_title = "Shipping Quote - AJ Shipping";
       }
     }
 
-    function showErrorMessage() {
+    function showErrorToast() {
       // Hide loading
       loadingEl.style.display = "none";
       loadingEl.classList.add("hidden");
       
-      // Show error message in results section
-      resultsEl.style.display = "block";
-      resultsEl.classList.remove("hidden");
-      
-      const resultsContainer = resultsEl.querySelector('.bg-white.box-shadow');
-      if (resultsContainer) {
-        resultsContainer.innerHTML = `
-          <div class="text-center py-8">
-            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
-              <svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Submission Failed</h3>
-            <p class="text-gray-600 mb-4">
-              We're sorry, but there was an error submitting your quote request. Please try again.
-            </p>
-            <p class="text-sm text-gray-500 mb-6">
-              If the problem persists, please contact us directly at <a href="mailto:quotes@ajshipping.com" class="text-primary underline">quotes@ajshipping.com</a>
-            </p>
-            <button 
-              onclick="window.location.reload()" 
-              class="btn btn-primary px-6 py-2"
-            >
-              Try Again
-            </button>
+      // Create and show toast notification
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-4 right-4 bg-red-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md';
+      toast.innerHTML = `
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-6 w-6 text-red-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
-        `;
-      }
+          <div class="ml-3 flex-1">
+            <p class="text-sm font-medium">Submission Failed</p>
+            <p class="text-sm text-red-200 mt-1">
+              There was an error submitting your quote request. Please try again.
+            </p>
+          </div>
+          <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-red-200 hover:text-white">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(toast);
+      
+      // Auto-remove toast after 5 seconds
+      setTimeout(() => {
+        if (toast.parentElement) {
+          toast.remove();
+        }
+      }, 5000);
     }
 
     function generateMockOptions(destination: string, weight: string, value?: string, length?: string, width?: string, height?: string) {

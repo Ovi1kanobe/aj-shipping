@@ -1,0 +1,106 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const meta_title = "Dashboard - Crev Shipping";
+const description = "Manage your shipments and track packages with Crev Shipping.";
+---
+
+<Base meta_title={meta_title} description={description}>
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-8">
+            <h1 class="mb-4 text-h2">Dashboard</h1>
+            <p class="text-light dark:text-darkmode-light">
+              Welcome to your Crev Shipping dashboard. Manage your shipments and track packages.
+            </p>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Quick Actions -->
+            <div class="rounded-lg bg-theme-light p-6 shadow-lg dark:bg-darkmode-theme-light">
+              <h3 class="mb-4 text-h5">Quick Actions</h3>
+              <div class="space-y-3">
+                <a href="/quote" class="block rounded bg-primary px-4 py-2 text-center text-white hover:bg-primary/90">
+                  Create Shipping Request
+                </a>
+                <a href="/track" class="block rounded bg-secondary px-4 py-2 text-center text-white hover:bg-secondary/90">
+                  Track Package
+                </a>
+              </div>
+            </div>
+
+            <!-- Recent Shipments -->
+            <div class="rounded-lg bg-theme-light p-6 shadow-lg dark:bg-darkmode-theme-light">
+              <h3 class="mb-4 text-h5">Recent Shipments</h3>
+              <div id="recentShipments">
+                <p class="text-light dark:text-darkmode-light">Loading shipments...</p>
+              </div>
+            </div>
+
+            <!-- Account Info -->
+            <div class="rounded-lg bg-theme-light p-6 shadow-lg dark:bg-darkmode-theme-light">
+              <h3 class="mb-4 text-h5">Account Info</h3>
+              <div id="accountInfo">
+                <p class="text-light dark:text-darkmode-light">Loading account info...</p>
+              </div>
+              <div class="mt-4">
+                <button 
+                  id="logoutButton"
+                  class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { isAuthenticated, getCurrentUser, logout } from '@/lib/utils/pocketbase';
+
+  // Check if user is authenticated
+  if (!isAuthenticated()) {
+    window.location.href = '/login';
+  }
+
+  // Load user info
+  const user = getCurrentUser();
+  if (user) {
+    const accountInfo = document.getElementById('accountInfo');
+    if (accountInfo) {
+      accountInfo.innerHTML = `
+        <p class="mb-2"><strong>Name:</strong> ${user.name || 'Not set'}</p>
+        <p class="mb-2"><strong>Email:</strong> ${user.email}</p>
+        <p class="text-sm text-light dark:text-darkmode-light">
+          Member since: ${new Date(user.created).toLocaleDateString()}
+        </p>
+      `;
+    }
+  }
+
+  // Handle logout
+  const logoutButton = document.getElementById('logoutButton');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', () => {
+      logout();
+      window.location.href = '/';
+    });
+  }
+
+  // Load recent shipments (placeholder for now)
+  const recentShipments = document.getElementById('recentShipments');
+  if (recentShipments) {
+    recentShipments.innerHTML = `
+      <p class="text-light dark:text-darkmode-light text-sm">
+        No recent shipments found. 
+        <a href="/quote" class="text-primary hover:underline">Create your first shipping request</a>
+      </p>
+    `;
+  }
+</script>
