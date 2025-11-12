@@ -114,6 +114,7 @@ export type PartnersRecord = {
 export type QuoteRequestsRecord = {
 	completed?: boolean
 	created: IsoAutoDateString
+	created_by?: RecordIdString
 	declared_value_usd?: number
 	delivery_instructions?: string
 	destination_country?: RecordIdString
@@ -130,6 +131,8 @@ export type QuoteRequestsRecord = {
 	recipient_postal_code?: string
 	recipient_state?: string
 	referrer?: RecordIdString
+	rejected?: boolean
+	rejected_reason?: string
 	sender_address?: string
 	sender_city?: string
 	sender_email?: string
@@ -157,6 +160,10 @@ export type SupportedCountriesRecord = {
 	updated: IsoAutoDateString
 }
 
+export enum UsersRoleOptions {
+	"manager" = "manager",
+	"reseller" = "reseller",
+}
 export type UsersRecord = {
 	avatar?: FileNameString
 	created: IsoAutoDateString
@@ -165,6 +172,7 @@ export type UsersRecord = {
 	id: string
 	name?: string
 	password: string
+	role?: UsersRoleOptions
 	tokenKey: string
 	updated: IsoAutoDateString
 	verified?: boolean

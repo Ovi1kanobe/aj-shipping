@@ -474,12 +474,15 @@ const meta_title = "Shipping Quote - AJ Shipping";
   </section>
 
   <script>
-    import pb from "@/lib/utils/pocketbase";
+    import pb, { isAuthenticated, getCurrentUser } from "@/lib/utils/pocketbase";
 
     const form = document.getElementById("quote-form") as HTMLFormElement;
     const loadingEl = document.getElementById("loading") as HTMLElement;
     const resultsEl = document.getElementById("results") as HTMLElement;
     const resultsBody = document.getElementById("results-body") as HTMLElement;
+
+    // Check if user is logged in and pre-fill sender information
+    const currentUser = isAuthenticated() ? getCurrentUser() : null;
 
     document.addEventListener("DOMContentLoaded", async () => {
       const destinationSelect = document.getElementById("destination") as HTMLSelectElement;
@@ -505,6 +508,27 @@ const meta_title = "Shipping Quote - AJ Shipping";
         console.error("Failed to load supported countries:", error);
         // Fallback to hardcoded options if API fails
         console.log("Using fallback country list");
+      }
+
+      // Pre-fill sender information if user is logged in
+      if (currentUser) {
+        const senderEmailInput = document.getElementById("sender-email") as HTMLInputElement;
+        const senderFirstNameInput = document.getElementById("sender-first-name") as HTMLInputElement;
+        const senderLastNameInput = document.getElementById("sender-last-name") as HTMLInputElement;
+
+        if (senderEmailInput && currentUser.email) {
+          senderEmailInput.value = currentUser.email;
+        }
+
+        if (senderFirstNameInput && currentUser.name) {
+          // Split the name if it contains spaces
+          const nameParts = currentUser.name.split(' ');
+          senderFirstNameInput.value = nameParts[0] || '';
+          
+          if (senderLastNameInput && nameParts.length > 1) {
+            senderLastNameInput.value = nameParts.slice(1).join(' ');
+          }
+        }
       }
     });
 
@@ -586,6 +610,11 @@ const meta_title = "Shipping Quote - AJ Shipping";
           completed: false,
         };
 
+        // Add user ID if logged in
+        if (currentUser && currentUser.id) {
+          quoteData.created_by = currentUser.id;
+        }
+
         // Add referrer if present
         if (referrer) {
           quoteData.referrer = referrer;
@@ -622,16 +651,22 @@ const meta_title = "Shipping Quote - AJ Shipping";
       resultsEl.style.display = "block";
       resultsEl.classList.remove("hidden");
       
-      // Center the results section
+      // Center the results section and adjust column width
       const resultsRow = resultsEl.parentElement as HTMLElement;
       if (resultsRow) {
         resultsRow.className = "row justify-center mt-8";
       }
       
+      // Update the column class to make it narrower and more centered
+      const resultsCol = resultsEl.querySelector('.col-10') as HTMLElement;
+      if (resultsCol) {
+        resultsCol.className = "col-12 md:col-8 lg:col-6";
+      }
+      
       const resultsContainer = resultsEl.querySelector('.bg-white.box-shadow');
       if (resultsContainer) {
         resultsContainer.innerHTML = `
-          <div class="text-center py-12">
+          <div class="text-center py-12 px-4">
             <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
               <svg class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
