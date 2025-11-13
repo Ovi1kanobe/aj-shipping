@@ -83,10 +83,6 @@ export interface AuthContextType {
     onError: (error: PocketBaseError) => void,
     onSuccess: () => void
   ) => void;
-  loginWithCCCR: (
-    onError: (error: PocketBaseError) => void,
-    onSuccess: () => void
-  ) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -382,116 +378,6 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
     [pb, user]
   );
 
-  const loginWithCCCR = useCallback(
-    async (onError: (error: PocketBaseError) => void, onSuccess: () => void) => {
-      try {
-        const state = Math.random().toString(36).substring(2, 15);
-        
-        const response = await pb.send("/api/sso/circuitcentral/initiate", 
-          {
-            method: "GET",
-            query: {
-              state: state,
-            }
-          }
-        );
-        
-        if (!response.redirectUrl) {
-          throw new PocketBaseError(
-            "No redirect URL",
-            400,
-            { code: 1001, message: "No redirect URL received from server", data: {} },
-            false,
-            null
-          );
-        }
-
-        // Open CCCR OAuth in a popup window (centered)
-        const width = 600;
-        const height = 700;
-        const left = window.screenX + (window.outerWidth - width) / 2;
-        const top = window.screenY + (window.outerHeight - height) / 2;
-        
-        const popup = window.open(
-          response.redirectUrl,
-          'cccr-login',
-          `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`
-        );
-
-        if (!popup) {
-          throw new PocketBaseError(
-            "Popup blocked",
-            400,
-            { code: 1001, message: "Popup blocked. Please allow popups for this site.", data: {} },
-            false,
-            null
-          );
-        }
-
-        // Listen for messages from the popup
-        const messageListener = async (event: MessageEvent) => {
-          console.log("Received message from popup:", event.data);
-          console.log("Message origin:", event.origin);
-
-          if (event.data.type === 'CCFE1_SSO_AUTH_SUCCESS') {
-            // Wait 2 seconds for backend to process, then verify with our backend
-            setTimeout(async () => {
-              try {
-                const verifyResponse = await pb.send("/api/sso/circuitcentral/verify", 
-                  {
-                    method: "POST",
-                    body: {
-                      state: state,
-                    }
-                  }
-                );
-                
-                if (verifyResponse.success) {
-                  pb.authStore.save(verifyResponse.token, verifyResponse.user_record);
-                  setUser(verifyResponse.user_record);
-                  popup.close();
-                  window.removeEventListener('message', messageListener);
-                  onSuccess();
-                  
-                } else {
-                  popup.close();
-                  window.removeEventListener('message', messageListener);
-                  onError(new PocketBaseError(
-                    "Verification failed",
-                    401,
-                    { code: 1001, message: "CCCR login verification failed", data: {} },
-                    false,
-                    null
-                  ));
-                }
-              } catch (error) {
-                popup.close();
-                window.removeEventListener('message', messageListener);
-                onError(error as PocketBaseError);
-              }
-            }, 1000);
-          } else if (event.data.type === 'CCFE1_SSO_AUTH_ERROR') {
-            popup.close();
-            window.removeEventListener('message', messageListener);
-            onError(new PocketBaseError(
-              "CCCR auth error",
-              401,
-              { code: 1001, message: "CCCR login failed", data: {} },
-              false,
-              null
-            ));
-          }
-        };
-
-        window.addEventListener('message', messageListener);
-
-      } catch (error) {
-        onError(error as PocketBaseError);
-      }
-    },
-    [pb]
-  );
-
   useEffect(() => {
     fetchCurrentUser(
       () => {
@@ -558,7 +444,6 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
       requestOTP,
       loginWithOTP,
       setMFA,
-      loginWithCCCR,
     }),
     [
       user,
@@ -579,7 +464,6 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
       requestOTP,
       loginWithOTP,
       setMFA,
-      loginWithCCCR,
     ]
   );
 
