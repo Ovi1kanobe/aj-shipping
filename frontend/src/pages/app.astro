@@ -1,0 +1,39 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const meta_title = "App - Crev Shipping";
+const description = "Manage your shipments and track packages with Crev Shipping.";
+---
+
+<Base meta_title={meta_title} description={description}>
+  <div id="app-root"></div>
+</Base>
+
+<script>
+  import React from 'react';
+  import { createRoot } from 'react-dom/client';
+  import { ClientContextProvider } from '../app/context/client';
+  import { AuthContextProvider } from '../app/context/auth';
+  import { App } from '../app/components/App';
+
+  function AppWithProviders() {
+    return React.createElement(
+      ClientContextProvider,
+      null,
+      React.createElement(
+        AuthContextProvider,
+        null,
+        React.createElement(App, null)
+      )
+    );
+  }
+
+  // Initialize React app
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('app-root');
+    if (container) {
+      const root = createRoot(container);
+      root.render(React.createElement(AppWithProviders, null));
+    }
+  });
+</script>
