@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/ui/dialog";
+import { CreateQuoteForm } from "./CreateQuoteForm";
 import type { QuoteRequestsResponse } from "../lib/pocketbase-types";
 
 interface QuoteRequestDetailProps {
@@ -18,15 +19,15 @@ interface QuoteRequestDetailProps {
 
 export function QuoteRequestDetail({ request, open, onOpenChange, onUpdate }: QuoteRequestDetailProps) {
   const { pb } = useClient();
-  const [quotePrice, setQuotePrice] = React.useState("");
   const [rejectionReason, setRejectionReason] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [showCreateQuote, setShowCreateQuote] = React.useState(false);
 
-  // Update quote price when request changes
+  // Reset form when request changes
   React.useEffect(() => {
     if (request) {
-      setQuotePrice(request.quote_price?.toString() || "");
       setRejectionReason("");
+      setShowCreateQuote(false);
     }
   }, [request]);
 
@@ -42,26 +43,13 @@ export function QuoteRequestDetail({ request, open, onOpenChange, onUpdate }: Qu
     });
   };
 
-  const handleApprove = async () => {
-    if (!quotePrice || isNaN(Number(quotePrice))) {
-      alert("Please enter a valid quote price");
-      return;
-    }
+  const handleCreateQuote = () => {
+    setShowCreateQuote(true);
+  };
 
-    setLoading(true);
-    try {
-      await pb.collection('quote_requests').update(request.id, {
-        quote_price: Number(quotePrice),
-        completed: true
-      });
-      onUpdate?.();
-      onOpenChange(false);
-    } catch (err) {
-      console.error('Error approving quote:', err);
-      alert("Error approving quote. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  const handleQuoteCreated = () => {
+    onUpdate?.();
+    onOpenChange(false);
   };
 
   const handleReject = async () => {
@@ -263,26 +251,18 @@ export function QuoteRequestDetail({ request, open, onOpenChange, onUpdate }: Qu
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Approve Section */}
                 <div className="space-y-4">
-                  <h4 className="font-medium text-green-600 dark:text-green-400">Approve Quote</h4>
-                  <div>
-                    <label className="block text-sm font-medium text-dark/70 dark:text-darkmode-dark/70 mb-2">
-                      Quote Price ($)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={quotePrice}
-                      onChange={(e) => setQuotePrice(e.target.value)}
-                      className="w-full rounded-lg border border-border bg-body px-4 py-3 text-dark focus:border-primary focus:ring-0 dark:border-darkmode-border dark:bg-darkmode-body dark:text-darkmode-dark"
-                      placeholder="Enter quote price"
-                    />
+                  <h4 className="font-medium text-green-600 dark:text-green-400">Create Quote</h4>
+                  <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                    <p className="text-sm text-green-700 dark:text-green-300 mb-3">
+                      Create a detailed quote with pricing and notes for this shipping request.
+                    </p>
                   </div>
                   <button
-                    onClick={handleApprove}
+                    onClick={handleCreateQuote}
                     disabled={loading}
                     className="w-full rounded bg-green-600 px-6 py-3 text-white hover:bg-green-700 disabled:opacity-50"
                   >
-                    {loading ? "Processing..." : "Approve Quote"}
+                    Create Quote
                   </button>
                 </div>
 
@@ -314,6 +294,16 @@ export function QuoteRequestDetail({ request, open, onOpenChange, onUpdate }: Qu
           )}
         </div>
       </DialogContent>
+      
+      {/* Create Quote Form */}
+      {request && (
+        <CreateQuoteForm
+          request={request}
+          open={showCreateQuote}
+          onOpenChange={setShowCreateQuote}
+          onQuoteCreated={handleQuoteCreated}
+        />
+      )}
     </Dialog>
   );
 }

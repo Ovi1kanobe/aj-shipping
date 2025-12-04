@@ -14,6 +14,7 @@ export enum Collections {
 	Carriers = "carriers",
 	Partners = "partners",
 	QuoteRequests = "quote_requests",
+	Quotes = "quotes",
 	ShippingMethods = "shipping_methods",
 	SupportedCountries = "supported_countries",
 	Users = "users",
@@ -146,6 +147,15 @@ export type QuoteRequestsRecord = {
 	width_inches?: number
 }
 
+export type QuotesRecord = {
+	created: IsoAutoDateString
+	id: string
+	notes?: string
+	price?: number
+	request?: RecordIdString
+	updated: IsoAutoDateString
+}
+
 export type ShippingMethodsRecord = {
 	created: IsoAutoDateString
 	id: string
@@ -187,6 +197,7 @@ export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> &
 export type CarriersResponse<Texpand = unknown> = Required<CarriersRecord> & BaseSystemFields<Texpand>
 export type PartnersResponse<Texpand = unknown> = Required<PartnersRecord> & BaseSystemFields<Texpand>
 export type QuoteRequestsResponse<Texpand = unknown> = Required<QuoteRequestsRecord> & BaseSystemFields<Texpand>
+export type QuotesResponse<Texpand = unknown> = Required<QuotesRecord> & BaseSystemFields<Texpand>
 export type ShippingMethodsResponse<Texpand = unknown> = Required<ShippingMethodsRecord> & BaseSystemFields<Texpand>
 export type SupportedCountriesResponse<Texpand = unknown> = Required<SupportedCountriesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
@@ -202,6 +213,7 @@ export type CollectionRecords = {
 	carriers: CarriersRecord
 	partners: PartnersRecord
 	quote_requests: QuoteRequestsRecord
+	quotes: QuotesRecord
 	shipping_methods: ShippingMethodsRecord
 	supported_countries: SupportedCountriesRecord
 	users: UsersRecord
@@ -216,6 +228,7 @@ export type CollectionResponses = {
 	carriers: CarriersResponse
 	partners: PartnersResponse
 	quote_requests: QuoteRequestsResponse
+	quotes: QuotesResponse
 	shipping_methods: ShippingMethodsResponse
 	supported_countries: SupportedCountriesResponse
 	users: UsersResponse
